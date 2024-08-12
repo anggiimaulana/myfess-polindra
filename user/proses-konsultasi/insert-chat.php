@@ -23,5 +23,5 @@ if (isset($_SESSION['unique_id'])) {
                             VALUES ('{$incoming_id}', '{$outgoing_id}', '{$encrypted_message}')") or die(mysqli_error($conn));
     }
 } else {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
 }

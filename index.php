@@ -114,7 +114,7 @@
                 if (xhr.status === 200) {
                     let response = xhr.responseText;
                     if (response === "success") {
-                        window.location.href = "user/home.php";
+                        window.location.href = "user/";
                     } else {
                         document.querySelector(".error-txt").textContent = response;
                     }

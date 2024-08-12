@@ -21,7 +21,8 @@ if(!isset($_SESSION['unique_id'])) {
             <form action="proses/insert_komentar.php" class="typing-area">
                 <input type="text" name="id_user_komen" value="<?php echo $_SESSION['unique_id']; ?>" hidden>
                 <input type="text" name="post_unique" value="<?php echo isset($_GET['post_unique']) ? $_GET['post_unique'] : ''; ?>" hidden>
-                <input type="text" name="isi_komen" class="input-field" placeholder="Ketik komentar disini..">
+                <textarea name="isi_komen" class="input-field" placeholder="Ketik komentar disini.." 
+        style="flex-grow: 1; padding: 5px; border: 1px solid var(--grey); border-radius: 10px; font-size: 14px; resize: none;"></textarea>
                 <button type="submit"><i class="fab fa-telegram-plane"></i></button>
             </form>
         </section>

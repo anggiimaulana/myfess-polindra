@@ -15,7 +15,7 @@ $post_content = isset($_SESSION['form_data']['post_content']) ? $_SESSION['form_
     <?php include 'template/header.php' ?>
         <section class="postingan-area">
             <header>
-                <a href="index.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+                <a href="./" class="back-icon"><i class="fas fa-arrow-left"></i></a>
                 <p>Buat Cerita</p>
                 <!-- <a href="#"><h4>Bagikan</h4></a> -->
             </header>

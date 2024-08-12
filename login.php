@@ -50,7 +50,7 @@ if (isset($_SESSION['unique_id'])) {
                     <input type="submit" value="Login" class="rotate-on-hover">
                 </div>
             </form>
-            <div class="link">Belum punya akun? <a href="index.php">Daftar disini!</a></div>
+            <div class="link">Belum punya akun? <a href="./">Daftar disini!</a></div>
         </section>
     </div>
 
