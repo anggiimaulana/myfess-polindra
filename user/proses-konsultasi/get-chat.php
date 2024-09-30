@@ -21,9 +21,11 @@ if (isset($_SESSION['unique_id'])) {
 
     $sql = "SELECT * from messages 
             LEFT JOIN users on users.unique_id = messages.incoming_msg_id
-            where (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
-            OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) ORDER BY msg_id";
+            where (outgoing_msg_id = '{$outgoing_id}' AND incoming_msg_id = '{$incoming_id}')
+            OR (outgoing_msg_id = '{$incoming_id}' AND incoming_msg_id = '{$outgoing_id}') 
+            ORDER BY msg_id";
     $query = mysqli_query($conn, $sql);
+    
     if (mysqli_num_rows($query) > 0) {
         while($row = mysqli_fetch_assoc($query)) {
             $decrypted_message = decryptMessage($row['msg'], $decryption_key);
@@ -46,4 +48,3 @@ if (isset($_SESSION['unique_id'])) {
 } else {
     header("Location: ../../login.php");
 }
-?>

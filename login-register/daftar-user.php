@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../config/config.php";
+require "../config/config.php";
 
 // Escape all input
 $fname = mysqli_real_escape_string($conn, $_POST['fname']);
@@ -42,10 +42,10 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // Upload profile picture if exists
 $new_img_name = "";
-if (isset($_FILES['image'])) {
+if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     $img_name = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
-    $img_ext = pathinfo($img_name, PATHINFO_EXTENSION);
+    $img_ext = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
     $allowed_extensions = ['png', 'jpeg', 'jpg'];
 
     if (!in_array($img_ext, $allowed_extensions)) {
@@ -70,23 +70,22 @@ if (isset($_FILES['image'])) {
 
 // Insert user data into the database
 $status = "Online";
-$unique_id = rand(time(), 10000000);
+
+// Generate a more unique random ID
+$unique_id = bin2hex(random_bytes(8));
 
 $sql2 = mysqli_query($conn, "INSERT INTO users (unique_id, fname, lname, nim, prodi, kelas, email, password, img, status)
                             VALUES ('{$unique_id}', '{$fname}', '{$lname}', '{$nim}', '{$prodi}', '{$kelas}', '{$email}', '{$hashed_password}', '{$new_img_name}', '{$status}')");
 
 if ($sql2) {
-    // Retrieve inserted user data
     $sql3 = mysqli_query($conn, "SELECT * FROM users WHERE nim = '{$nim}'");
     if (mysqli_num_rows($sql3) > 0) {
         $row = mysqli_fetch_assoc($sql3);
         $_SESSION['unique_id'] = $row['unique_id'];
         echo "success";
-        exit();
     } else {
         echo "User not found after insertion.";
     }
 } else {
-    echo "Terjadi kesalahan. Silakan coba lagi.";
+    echo "Error: " . mysqli_error($conn);
 }
-?>

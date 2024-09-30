@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<?php include_once "header.php"?>
 <body>
     <div class="wrapper">
         <section class="form signup">
@@ -37,7 +30,7 @@
                     </div>
                     <div class="field input">
                         <label for="prodi">Prodi</label>
-                        <select id="pilihanProdi" name="pilihanProdi" onchange="updateKelasOptions()">
+                        <select id="pilihanProdi" name="pilihanProdi" onchange="updateKelasOptions()" required>
                             <option disabled selected>Pilih Prodi</option>
                             <option value="D3 Teknik Mesin">D3 Teknik Mesin</option>
                             <option value="D4 Perancangan Manufaktur">D4 Perancangan Manufaktur</option>
@@ -51,7 +44,7 @@
                     </div>
                     <div class="field input">
                         <label for="kelas">Kelas</label>
-                        <select name="pilihanKelas" id="pilihanKelas"></select>
+                        <select name="pilihanKelas" id="pilihanKelas" required></select>
                     </div>
                     <div class="field input">
                         <label for="email">Email</label>
@@ -80,14 +73,14 @@
             kelasSelect.innerHTML = "";
 
             var kelasOptions = {
-                "D3 Teknik Mesin": ["D3TM1A", "D3TM1B", "D3TM1C", "D3TM2A", "D3TM2B", "D3TM2C", "D3TM3A", "D3TM3B", "D3TM3C"],
-                "D4 Perancangan Manufaktur": ["D4PM1A", "D4PM1B", "D4PM1C", "D4PM2A", "D4PM2B", "D4PM2C", "D4PM3A", "D4PM3B", "D4PM3C", "D4PM4A", "D4PM4B", "D4PM4C"],
-                "D3 Teknik Pendingin dan Tata Udara": ["D3TP1A", "D3TP1B", "D3TP1C", "D3TP2A", "D3TP2B", "D3TP2C", "D3TP3A", "D3TP3B", "D3TP3C"],
+                "D3 Teknik Mesin": ["D3TM1A", "D3TM1B", "D3TM1C"],
+                "D4 Perancangan Manufaktur": ["D4PM1A", "D4PM1B", "D4PM1C"],
+                "D3 Teknik Pendingin dan Tata Udara": ["D3TP1A", "D3TP1B", "D3TP1C"],
                 "D4 Teknologi Rekayasa Instrumentasi dan Kontrol": ["D4TRIK1A"],
-                "D3 Teknik Informatika": ["D3TI1A", "D3TI1B", "D3TI1C", "D3TI2A", "D3TI2B", "D3TI2C", "D3TI3A", "D3TI3B", "D3TI3C"],
-                "D4 Rekayasa Perangkat Lunak": ["D4RPL1A", "D4RPL1B", "D4RPL1C", "D4RPL2A", "D4RPL2B", "D4RPL2C", "D4RPL3A", "D4RPL3B", "D4RPL3C", "D4RPL4A", "D4RPL4B", "D4RPL4C"],
-                "D4 Sistem Informasi Kota Cerdas": ["D4SIKC1A", "D4SIKC1B", "D4SIKC1C", "D4SIKC1D"],
-                "D3 Keperawatan": ["D3Kep1A", "D3Kep1B", "D3Kep1C", "D3Kep2A", "D3Kep2B", "D3Kep2C", "D3Kep3A", "D3Kep3B", "D3Kep3C"]
+                "D3 Teknik Informatika": ["D3TI1A", "D3TI1B", "D3TI1C"],
+                "D4 Rekayasa Perangkat Lunak": ["D4RPL1A", "D4RPL1B", "D4RPL1C"],
+                "D4 Sistem Informasi Kota Cerdas": ["D4SIKC1A", "D4SIKC1B", "D4SIKC1C"],
+                "D3 Keperawatan": ["D3Kep1A", "D3Kep1B", "D3Kep1C"]
             };
 
             if (kelasOptions[prodi]) {
