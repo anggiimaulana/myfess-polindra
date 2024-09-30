@@ -17,7 +17,7 @@ if (isset($_SESSION['unique_id'])) {
         return openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
     }
 
-    $decryption_key = 'secretkey123'; // Gantilah dengan kunci enkripsi yang aman
+    $decryption_key = 'fgkia7ty7fs3hg92q8JBD00ldsd'; 
 
     $sql = "SELECT * from messages 
             LEFT JOIN users on users.unique_id = messages.incoming_msg_id

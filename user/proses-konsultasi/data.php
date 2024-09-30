@@ -1,6 +1,6 @@
 <?php 
 $users = [];
-$encryption_key = 'secretkey123'; // Gantilah dengan kunci enkripsi yang aman
+$encryption_key = 'adlN033kfnkmv7v23shejakw389oSpXXqdsa';
 
 // Fungsi dekripsi
 function decryptMessage($encrypted_message, $key) {

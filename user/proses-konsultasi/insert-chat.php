@@ -20,7 +20,7 @@ function encryptMessage($message, $key) {
     return base64_encode($iv . $ciphertext . $tag);
 }
 
-$encryption_key = 'secretkey123'; // Gantilah dengan kunci enkripsi yang aman
+$encryption_key = 'wwax83rw2KN424PfnOjJDZZ881rRtue'; 
 $encrypted_message = encryptMessage($message, $encryption_key);
 
 if (!empty($encrypted_message)) {
