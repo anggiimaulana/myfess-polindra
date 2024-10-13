@@ -39,7 +39,7 @@
         <section class="form-isi profile">
             <form action="#" enctype="multipart/form-data">
                 <?php 
-                include_once "../../config/config.php";
+                require "../../config/config.php";
 
                 $user_id = $_SESSION['unique_id'];  // Mengambil ID pengguna dari sesi
 

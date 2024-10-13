@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "../../config/config.php";
+require "../../config/config.php";
 
 $outgoing_id = $_SESSION['unique_id'];
 $searchTerm = mysqli_real_escape_string($conn, $_POST['searchTerm']);
@@ -29,4 +29,4 @@ if ($result) { // Memastikan $result valid
     die("Error executing query: " . htmlspecialchars($sql->error));
 }
 
-$sql->close(); // Menutup prepared statement
+// $sql->close(); // Menutup prepared statement
