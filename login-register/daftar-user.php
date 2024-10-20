@@ -2,7 +2,6 @@
 session_start();
 require "../config/config.php";
 
-// Escape all input
 $fname = mysqli_real_escape_string($conn, $_POST['fname']);
 $lname = mysqli_real_escape_string($conn, $_POST['lname']);
 $nim = mysqli_real_escape_string($conn, $_POST['nim']);
@@ -30,17 +29,17 @@ if (mysqli_num_rows($sql) > 0) {
     exit();
 }
 
-// Check if email already exists
+// Pengecekan email
 $sql = mysqli_query($conn, "SELECT email FROM users WHERE email = '{$email}'");
 if (mysqli_num_rows($sql) > 0) {
     echo "Email $email sudah digunakan.";
     exit();
 }
 
-// Hash the password before storing
+// Password di hash
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// Upload profile picture if exists
+// Upload foto profile 
 $new_img_name = "";
 if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     $img_name = $_FILES['image']['name'];
@@ -56,7 +55,6 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     $time = time();
     $new_img_name = $time . "_" . $img_name;
 
-    // Ensure the image directory exists
     $img_dir = "../user/images/";
     if (!is_dir($img_dir)) {
         mkdir($img_dir, 0755, true);
@@ -68,10 +66,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     }
 }
 
-// Insert user data into the database
 $status = "Online";
 
-// Generate a more unique random ID
+// Generate unique id random
 $unique_id = bin2hex(random_bytes(8));
 
 $sql2 = mysqli_query($conn, "INSERT INTO users (unique_id, fname, lname, nim, prodi, kelas, email, password, img, status)

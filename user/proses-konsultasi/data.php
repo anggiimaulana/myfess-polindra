@@ -21,11 +21,11 @@ function decryptMessage($encrypted_message, $key) {
 }
 
 // Kumpulkan semua data pengguna dan pesan terakhirnya
-$sql = "SELECT * FROM users WHERE unique_id != '{$outgoing_id}'"; // Menghindari diri sendiri
-$query = mysqli_query($conn, $sql); // Pastikan $conn adalah koneksi database yang valid
+$sql = "SELECT * FROM users WHERE unique_id != '{$outgoing_id}'"; 
+$query = mysqli_query($conn, $sql); 
 
 if (!$query) {
-    die('Query Error: ' . mysqli_error($conn)); // Tangani kesalahan query
+    die('Query Error: ' . mysqli_error($conn)); 
 }
 
 while($row = mysqli_fetch_assoc($query)) {
@@ -35,7 +35,7 @@ while($row = mysqli_fetch_assoc($query)) {
     $query2 = mysqli_query($conn, $sql2);
     
     if (!$query2) {
-        die('Query Error: ' . mysqli_error($conn)); // Tangani kesalahan query
+        die('Query Error: ' . mysqli_error($conn)); 
     }
     
     if (mysqli_num_rows($query2) > 0) {
@@ -47,12 +47,12 @@ while($row = mysqli_fetch_assoc($query)) {
     } else {
         $msg = "Belum ada pesan";
         $you = "";
-        $msg_id = 0; // Jika tidak ada pesan, beri nilai msg_id yang lebih rendah dari yang ada
+        $msg_id = 0;
     }
 
     // Simpan data pengguna dan pesan terakhirnya dalam array, jika belum ada
-    $user_key = $row['unique_id']; // Ambil unique_id pengguna
-    if (!array_key_exists($user_key, $users)) { // Cek apakah pengguna sudah ada
+    $user_key = $row['unique_id']; 
+    if (!array_key_exists($user_key, $users)) { 
         $users[$user_key] = [
             'unique_id' => $row['unique_id'],
             'fname' => $row['fname'],
@@ -70,7 +70,7 @@ while($row = mysqli_fetch_assoc($query)) {
 if (!empty($users)) {
     // Urutkan pengguna berdasarkan pesan terakhir
     usort($users, function($a, $b) {
-        return $b['msg_id'] <=> $a['msg_id']; // Urutkan secara descending
+        return $b['msg_id'] <=> $a['msg_id']; 
     });
 
     $displayed_users = []; // Array untuk melacak pengguna yang sudah ditampilkan
@@ -99,7 +99,7 @@ if (!empty($users)) {
         }
     }
 
-    echo $output; // Output semua pengguna
+    echo $output; 
 } else {
     echo "Tidak ada pengguna untuk ditampilkan.";
 }
