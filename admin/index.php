@@ -74,11 +74,20 @@
     <section id="content">
         <?php include "layouts/nav.php"; ?>
         <main>
-            <div class="head-title">
-                <div class="left">
-                    <h1>Dashboard</h1>
-                </div>
-            </div>
+        <div class="head-title">
+        <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Admin</a>
+                </li>
+                <li><i class='bx bx-chevron-right' ></i></li>
+                <li>
+                    <a class="active" href="#">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
             <ul class="box-info">
                 <li>
                     <i class='bx bxs-group'></i>

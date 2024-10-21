@@ -503,25 +503,29 @@ body {
 	padding: 16px 0;
     border: 1px solid #ccc;
     padding: 10px;
+	text-align: center;
 }
 #content main .table-data .order table tbody tr:hover {
 	background: var(--grey);
 }
 #content main .table-data .order table tr td .status {
 	font-size: 10px;
-	padding: 6px 16px;
+	padding: 10px;
 	color: var(--light);
-	border-radius: 20px;
+	border-radius: 15px;
 	font-weight: 700;
 }
 #content main .table-data .order table tr td .status.completed {
 	background: var(--blue);
+	width: 100px;
 }
 #content main .table-data .order table tr td .status.process {
 	background: var(--yellow);
+	width: 100px;
 }
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);
+	width: 100px;
 }
 
 
@@ -620,4 +624,19 @@ body {
 .footer p {
     color: var(--blue);
     text-align: center;
+}
+
+.button{
+	width: 75px;
+	padding: 8px;
+	border-radius: 15px;
+	background-color: var(--blue);
+	border: none;
+}  
+
+.button a {
+	color: var(--light);
+	text-align: center;
+	font-size: 12px;
+	font-weight: 700;
 }

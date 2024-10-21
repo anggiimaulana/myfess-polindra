@@ -11,7 +11,7 @@
             </a>
         </li>
         <li>
-            <a href="filter-cerita.php" id="filter-cerita">
+            <a href="filter-postingan.php" id="filter-postingan">
                 <i class='bx bxs-doughnut-chart'></i>
                 <span class="text">Filter Postingan</span>
             </a>
