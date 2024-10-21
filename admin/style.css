@@ -29,6 +29,7 @@ li {
 	--light-yellow: #FFF2C6;
 	--orange: #FD7238;
 	--light-orange: #FFE0D3;
+	--biru: #3259A8;
 }
 
 html {
@@ -630,7 +631,7 @@ body {
 	width: 75px;
 	padding: 8px;
 	border-radius: 15px;
-	background-color: var(--blue);
+	background-color: var(--biru);
 	border: none;
 }  
 
@@ -639,4 +640,65 @@ body {
 	text-align: center;
 	font-size: 12px;
 	font-weight: 700;
+}
+
+/* form */
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.form-group {
+	display: flex;
+	gap: 1rem;
+}
+
+.form-group .dataPost {
+	flex: 1;
+}
+
+label {
+	font-weight: 700;
+	margin-bottom: 0.5rem;
+	display: block;
+}
+
+input[type="text"], textarea, select {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+textarea {
+	height: 150px;
+	resize: none;
+}
+
+.status-group {
+	width: 20%;
+}
+
+select {
+	box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    border-radius: 5px;
+}
+
+#submit {
+	background-color: var(--blue);
+	color: #F9F9F9;
+	padding: 10px;
+	border: none;
+	border-radius: 15px;
+	width: 100%;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+#submit:hover {
+	background-color: #0056b3;
+	color: #F9F9F9;
 }
