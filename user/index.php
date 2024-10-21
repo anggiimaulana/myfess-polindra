@@ -39,7 +39,7 @@
                 <?php 
                     include_once "../config/config.php";
                     $sql = "SELECT * FROM post 
-                    -- LEFT JOIN users on users.unique_id = post.user_post
+                            WHERE status = 1
                             ORDER BY post_id DESC";
                     $query = mysqli_query($conn, $sql);        
                     if ($query) {

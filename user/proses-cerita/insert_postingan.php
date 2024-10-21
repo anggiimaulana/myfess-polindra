@@ -16,7 +16,8 @@ if (isset($_SESSION['unique_id'])) {
 
             if (!empty($post_content)) {
                 $unique_post = rand(time(), 10000000);
-                $sql = mysqli_query($conn, "INSERT INTO post (unique_post, post_content, user_post) VALUES ('{$unique_post}', '{$post_content}', '{$user_post}')");
+                $status = 0;
+                $sql = mysqli_query($conn, "INSERT INTO post (unique_post, post_content, user_post, status) VALUES ('{$unique_post}', '{$post_content}', '{$user_post}', '{$status}')");
 
                 if ($sql) {
                     // Hapus data form dari session setelah berhasil menyimpan

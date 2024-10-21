@@ -5,7 +5,7 @@
     if(isset($_GET['id'])){
         $post_id = $_GET['id'];
 
-        $post_query = "SELECT post.*, users.fname, users.lname, users.kelas
+        $post_query = "SELECT post.*, users.fname, users.lname, users.kelas, users.nim
                         FROM post 
                         INNER JOIN users ON post.user_post = users.unique_id 
                         WHERE post.post_id = $post_id";
@@ -93,7 +93,7 @@
 							</div>
 							<div class="dataPost">
 								<label for="nim">NIM:</label>
-								<input type="text" id="nim" name="nim" value="123456" readonly disabled> <!-- Update dengan NIM dari database -->
+								<input type="text" id="nim" name="nim" value="<?php echo $post_data['nim']; ?>" readonly disabled> <!-- Update dengan NIM dari database -->
 							</div>
 						</div>
 						

@@ -670,6 +670,7 @@ input[type="text"], textarea, select {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
+	color: var(--dark);
 }
 
 textarea {
@@ -678,10 +679,11 @@ textarea {
 }
 
 .status-group {
-	width: 20%;
+	width: 10%;
 }
 
 select {
+	color: var(--biru);
 	box-sizing: border-box;
     transition: border-color 0.3s ease;
     border-radius: 5px;
