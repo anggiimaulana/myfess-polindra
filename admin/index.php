@@ -178,11 +178,7 @@
         // Data dari PHP
         const labels = <?php echo json_encode($labels); ?>;
         const dataProdi = <?php echo json_encode($dataProdi); ?>;
-
-        // Debugging untuk memeriksa apakah data sesuai
-        console.log(labels);
-        console.log(dataProdi);
-
+        
         var prodiChart;
         function createChart() {
             if (prodiChart) {

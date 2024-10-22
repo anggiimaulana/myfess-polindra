@@ -1,3 +1,4 @@
+<!-- header -->
 <?php 
 	include "layouts/header.php";
 ?>
@@ -72,83 +73,25 @@
 					<table>
 						<thead>
 							<tr>
-								<th>User</th>
-								<th>Date Order</th>
+								<th>Pengirim</th>
+								<th>Tanggal</th>
+								<th>File</th>
 								<th>Status</th>
+								<th>Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
+								<td>Anggi</td>
+								<td>13 Januari 2024</td>
+								<td>anggii.pdf</td>
+								<td><span class="status completed">Dibaca</span></td>
 								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
+									<button class='button'><a href=''>Tinjau</a></button>
 								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
-				<div class="todo">
-					<div class="head">
-						<h3>Todos</h3>
-						<i class='bx bx-plus' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<ul class="todo-list">
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-					</ul>
 				</div>
 			</div>
             <?php

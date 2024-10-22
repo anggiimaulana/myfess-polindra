@@ -628,7 +628,7 @@ body {
 }
 
 .button{
-	width: 75px;
+	width: 50px;
 	padding: 8px;
 	border-radius: 15px;
 	background-color: var(--biru);

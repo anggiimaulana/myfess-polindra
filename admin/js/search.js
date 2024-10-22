@@ -1,5 +1,3 @@
-
-
 // Tangani pencarian saat mengetik
 document.getElementById("searchInput").addEventListener("keyup", function() {
     var searchTerm = this.value;

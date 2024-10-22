@@ -67,7 +67,7 @@
             </div>
         </section>
         <!-- menu -->
-         <?php include 'template/menu.php' ?>
+        <?php include 'template/menu.php' ?>
         <!-- menu -->
     </div>
 </body>
