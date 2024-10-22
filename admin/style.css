@@ -664,7 +664,7 @@ label {
 	display: block;
 }
 
-input[type="text"], textarea, select {
+input[type="text"], textarea, select, input[type="date"] {
 	width: 100%;
 	padding: 0.5rem;
 	border: 1px solid #ccc;
@@ -712,4 +712,16 @@ select {
 .file a {
 	color: var(--blue);
 	text-decoration: underline;
+}
+
+.laporan {
+	padding: 8px 15px;
+	border-radius: 15px;
+	border: none;
+	background-color: var(--blue);
+	cursor: pointer;
+}
+
+.laporan a {
+	color: #F9F9F9;
 }

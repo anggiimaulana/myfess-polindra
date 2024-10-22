@@ -53,8 +53,7 @@
                 <div class="order">
                     <div class="head">
                         <h3>Recent Orders</h3>
-                        <i class='bx bx-search'></i>
-                        <i class='bx bx-filter'></i>
+                        <button class="laporan"><a href="r/create-report.php">Buat Laporan</a></button>
                     </div>
                     <table>
                         <thead>
