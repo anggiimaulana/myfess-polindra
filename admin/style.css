@@ -512,7 +512,7 @@ body {
 #content main .table-data .order table tr td .status {
 	font-size: 10px;
 	padding: 10px;
-	color: var(--light);
+	color: #F9F9F9;
 	border-radius: 15px;
 	font-weight: 700;
 }
@@ -628,7 +628,7 @@ body {
 }
 
 .button{
-	width: 50px;
+	width: 75px;
 	padding: 8px;
 	border-radius: 15px;
 	background-color: var(--biru);
@@ -636,7 +636,7 @@ body {
 }  
 
 .button a {
-	color: var(--light);
+	color: #F9F9F9;
 	text-align: center;
 	font-size: 12px;
 	font-weight: 700;
@@ -679,7 +679,7 @@ textarea {
 }
 
 .status-group {
-	width: 10%;
+	width: 20%;
 }
 
 select {
@@ -703,4 +703,13 @@ select {
 #submit:hover {
 	background-color: #0056b3;
 	color: #F9F9F9;
+}
+
+.file {
+	font-size: 12px;
+}
+
+.file a {
+	color: var(--blue);
+	text-decoration: underline;
 }
