@@ -69,7 +69,7 @@
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
                         <li>
-                            <a href="#">Daftar Laporan</a>
+                            <a href="#">Laporan</a>
                         </li>
                         <li><i class='bx bx-chevron-right'></i></li>
                         <li>
@@ -98,15 +98,18 @@
                                 <label for="file">File</label>
                                 <?php
                                 // Path ke direktori tempat file disimpan
-                                $file_dir = '/myfess/admin/r/doc/';
-                                $file_path = $_SERVER['DOCUMENT_ROOT'] . $file_dir . $laporan_data['file'];
+                                $file_dir = 'myfess/admin/r/doc/'; // Menggunakan path relatif
+                                $file_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $file_dir . $laporan_data['file'];
+                                $pathFile = 'doc/';
 
                                 // Cek apakah file ada di direktori
                                 if(file_exists($file_path)){
                                     // Tampilkan nama file sebagai tautan yang bisa diklik untuk membuka file
-                                    echo "<a href='{$file_dir}{$laporan_data['file']}' target='_blank'>" . $laporan_data['file'] . "</a>";
+                                    echo "<a href='{$pathFile}" . htmlspecialchars($laporan_data['file']) . "' target='_blank'>" . htmlspecialchars(basename($laporan_data['file'])) . "</a>";
                                 } else {
-                                    echo "File tidak ditemukan.";
+                                    // Tampilkan informasi debug
+                                    echo "File tidak ditemukan. Cek kembali: " . htmlspecialchars($file_path) . "<br>";
+                                    echo "Nama file yang dicari: " . htmlspecialchars($laporan_data['file']);
                                 }
                                 ?>
                             </div>

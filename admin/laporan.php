@@ -79,12 +79,15 @@
                                 $status_text = $status == 0 ? 'Belum Dibaca' : 'Dibaca';
                                 $status_class = $status == 0 ? 'pending' : 'completed';
 
+                                // Jika nama file lebih dari 25 karakter, potong dan tambahkan "..."
+                                $display_file = (strlen($file) > 25) ? substr($file, 0, 25) . '...' : $file;
+
                                 // Tampilkan data dalam tabel
                                 echo "<tr>
                                         <td>{$pengirim}</td>
                                         <td>{$tanggal}</td>
                                         <td class='file'>
-                                            <a href='r/doc/{$file}' target='_blank'>{$file}</a>
+                                            <a href='r/doc/{$file}' target='_blank'>{$display_file}</a>
                                         </td>
                                         <td><span class='status {$status_class}'>{$status_text}</span></td>
                                         <td>
@@ -94,6 +97,7 @@
                             }
                             ?>
                         </tbody>
+
                     </table>
                 </div>
             </div>

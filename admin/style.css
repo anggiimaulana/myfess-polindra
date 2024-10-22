@@ -682,6 +682,12 @@ textarea {
 	width: 20%;
 }
 
+@media screen and (max-width: 576px) {
+	.status-group {
+		width: 100%;
+	}
+}
+
 select {
 	color: var(--biru);
 	box-sizing: border-box;
@@ -725,3 +731,4 @@ select {
 .laporan a {
 	color: #F9F9F9;
 }
+
