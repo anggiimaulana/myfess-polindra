@@ -7,11 +7,10 @@
 ?>
 
 <?php include 'template/head.php' ?>
-
     <div class="wrapper">
         <?php include 'template/header.php' ?>
+        <?php include 'template/konsultasi/pilihan.php' ?>
         <section class="users">
-
             <div class="search">
                 <span class="text">Cari dan pilih user</span>
                 <input type="text" placeholder="Cari nama user">

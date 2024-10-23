@@ -189,7 +189,7 @@ body {
 
 /* Global styles */
 .users {
-    padding: 20px 30px;
+    padding: 0 30px;
 }
 
 .users header,
@@ -235,7 +235,7 @@ body {
 } */
 
 .users .search {
-    margin: 20px 0;
+    margin: 5px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1787,4 +1787,84 @@ min-height: 65vh;
 
 .notifikasi p {
     text-align: center;
+}
+
+.pilihanKonsultasi, .online {
+    display: flex;
+    justify-content: center; /* Menyusun elemen secara horizontal ke tengah */
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    gap: 5px; /* Memberi jarak antara elemen */
+}
+
+.konsultasi {
+    margin-bottom: 5px;
+}
+
+.konsultasi {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 5px 30px;
+    /* border: 1px solid #ccc; */
+    cursor: pointer;
+}
+
+.online {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px; 
+}
+
+.onlineKonsultasi {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 5px 25px;
+    /* border: 1px solid #ccc; */
+    cursor: pointer;
+}
+
+.konsultasi:hover {
+    color: #ff0b0b;
+    text-decoration: underline 1px solid #ff0b0b;
+}
+
+.separator {
+    margin: 0 10px; /* Memberi jarak antara elemen dengan separator */
+}
+
+.onlineKonsultasi {
+    margin: 5px 0;
+} 
+
+.onlineKonsultasi:hover {
+    background-color: #ff0b0b;
+    color: #fff;
+}
+
+hr {
+    width: 95%;
+    margin: auto;
+}
+
+.online {
+    display: none; /* Awalnya sembunyikan */
+}
+
+.show {
+    display: flex; /* Akan ditampilkan jika ada class show */
+}
+
+.konsultasi.active {
+    font-weight: 600;
+    color: #ff0b0b;
+    text-decoration: underline solid #ff0b0b;
+    border-radius: 5px;
+}
+
+.onlineKonsultasi.active {
+    border-radius: 15px;
+    color: #fff;
+    background-color: #ff0b0b;
 }
