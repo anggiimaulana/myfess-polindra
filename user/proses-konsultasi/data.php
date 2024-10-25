@@ -21,49 +21,43 @@ function decryptMessage($encrypted_message, $key) {
 }
 
 // Kumpulkan semua data pengguna dan pesan terakhirnya
-$sql = "SELECT * FROM users WHERE unique_id != '{$outgoing_id}'"; 
-$query = mysqli_query($conn, $sql); 
+$sql = "SELECT u.*, m.msg, m.outgoing_msg_id, m.incoming_msg_id, m.msg_id FROM users u 
+        LEFT JOIN (SELECT * FROM messages 
+                    WHERE (outgoing_msg_id = '{$outgoing_id}' OR incoming_msg_id = '{$outgoing_id}')
+                    ORDER BY msg_id DESC) m 
+        ON u.unique_id = m.outgoing_msg_id OR u.unique_id = m.incoming_msg_id
+        WHERE u.unique_id != '{$outgoing_id}'
+        GROUP BY u.unique_id"; // Grouping berdasarkan pengguna
+
+$query = mysqli_query($conn, $sql);
 
 if (!$query) {
     die('Query Error: ' . mysqli_error($conn)); 
 }
 
 while($row = mysqli_fetch_assoc($query)) {
-    $sql2 = "SELECT * FROM messages WHERE (incoming_msg_id = '{$row['unique_id']}' 
-            OR outgoing_msg_id = '{$row['unique_id']}') AND (outgoing_msg_id = '{$outgoing_id}' 
-            OR incoming_msg_id = '{$outgoing_id}') ORDER BY msg_id DESC LIMIT 1";
-    $query2 = mysqli_query($conn, $sql2);
-    
-    if (!$query2) {
-        die('Query Error: ' . mysqli_error($conn)); 
-    }
-    
-    if (mysqli_num_rows($query2) > 0) {
-        $row2 = mysqli_fetch_assoc($query2);
-        $decrypted_message = decryptMessage($row2['msg'], $encryption_key);
+    if ($row['msg']) {
+        $decrypted_message = decryptMessage($row['msg'], $encryption_key);
         $msg = (strlen($decrypted_message) > 28) ? substr($decrypted_message, 0, 28) . '...' : $decrypted_message;
-        $you = ($outgoing_id == $row2['outgoing_msg_id']) ? "Anda: " : "";
-        $msg_id = $row2['msg_id'];
+        $you = ($outgoing_id == $row['outgoing_msg_id']) ? "Anda: " : "";
+        $msg_id = $row['msg_id'];
     } else {
         $msg = "Belum ada pesan";
         $you = "";
         $msg_id = 0;
     }
 
-    // Simpan data pengguna dan pesan terakhirnya dalam array, jika belum ada
-    $user_key = $row['unique_id']; 
-    if (!array_key_exists($user_key, $users)) { 
-        $users[$user_key] = [
-            'unique_id' => $row['unique_id'],
-            'fname' => $row['fname'],
-            'lname' => $row['lname'],
-            'img' => $row['img'],
-            'status' => $row['status'],
-            'msg' => $msg,
-            'you' => $you,
-            'msg_id' => $msg_id
-        ];
-    }
+    // Simpan data pengguna dan pesan terakhirnya
+    $users[$row['unique_id']] = [
+        'unique_id' => $row['unique_id'],
+        'fname' => $row['fname'],
+        'lname' => $row['lname'],
+        'img' => $row['img'],
+        'status' => $row['status'],
+        'msg' => $msg,
+        'you' => $you,
+        'msg_id' => $msg_id
+    ];
 }
 
 // Ambil pengguna terakhir yang memiliki pesan
@@ -73,142 +67,25 @@ if (!empty($users)) {
         return $b['msg_id'] <=> $a['msg_id']; 
     });
 
-    $displayed_users = []; // Array untuk melacak pengguna yang sudah ditampilkan
-
     // Lakukan perulangan pada setiap pengguna yang telah diurutkan
     foreach ($users as $user) {
-        // Cek apakah pengguna sudah ditampilkan
-        if (!in_array($user['unique_id'], $displayed_users)) {
-            // Check status online - offline user
-            $offline = ($user['status'] == "Offline") ? "offline" : "";
+        // Check status online - offline user
+        $offline = ($user['status'] == "Offline") ? "offline" : "";
 
-            // Buat output HTML untuk setiap pengguna
-            $output .= '<a href="chat.php?user_id='.$user['unique_id'].'">
-                        <div class="content">
-                            <img src="images/'. $user['img'] .'" alt="User Image" loading="lazy">
-                            <div class="details">
-                                <span>'. htmlspecialchars($user['fname']) . " " . htmlspecialchars($user['lname']) .'</span>
-                                <p>'. $user['you'] . htmlspecialchars($user['msg']) .'</p>
-                            </div>
+        // Buat output HTML untuk setiap pengguna
+        $output .= '<a href="chat.php?user_id='.$user['unique_id'].'">
+                    <div class="content">
+                        <img src="images/'. $user['img'] .'" alt="User Image" loading="lazy">
+                        <div class="details">
+                            <span>'. htmlspecialchars($user['fname']) . " " . htmlspecialchars($user['lname']) .'</span>
+                            <p>'. $user['you'] . htmlspecialchars($user['msg']) .'</p>
                         </div>
-                        <div class="status-dot '. $offline .' "><i class="fas fa-circle"></i></div>
-                        </a>';
-
-            // Tambahkan pengguna ke dalam daftar yang sudah ditampilkan
-            $displayed_users[] = $user['unique_id'];
-        }
+                    </div>
+                    <div class="status-dot '. $offline .' "><i class="fas fa-circle"></i></div>
+                    </a>';
     }
 
     echo $output; 
 } else {
     echo "Tidak ada pengguna untuk ditampilkan.";
 }
-
-// 
-
-// <?php 
-// $users = [];
-// $encryption_key = 'wwax83rw2KN424PfnOjJDZZ881rRtue';
-// $output = ''; // Inisialisasi variabel output
-
-// // Fungsi dekripsi
-// function decryptMessage($encrypted_message, $key) {
-//     $cipher = "aes-128-gcm";
-//     $c = base64_decode($encrypted_message);
-//     $ivlen = openssl_cipher_iv_length($cipher);
-    
-//     if (strlen($c) < $ivlen + 16) {
-//         return "Pesan terenkripsi tidak valid";
-//     }
-    
-//     $iv = substr($c, 0, $ivlen);
-//     $tag = substr($c, -16);
-//     $ciphertext = substr($c, $ivlen, strlen($c) - $ivlen - 16);
-    
-//     return openssl_decrypt($ciphertext, $cipher, $key, $options=0, $iv, $tag);
-// }
-
-// // Kumpulkan semua data pengguna dan pesan terakhirnya
-// $sql = "SELECT * FROM users WHERE unique_id != '{$outgoing_id}'"; // Menghindari diri sendiri
-// $query = mysqli_query($conn, $sql); // Pastikan $conn adalah koneksi database yang valid
-
-// if (!$query) {
-//     die('Query Error: ' . mysqli_error($conn)); // Tangani kesalahan query
-// }
-
-// while($row = mysqli_fetch_assoc($query)) {
-//     $sql2 = "SELECT * FROM messages WHERE (incoming_msg_id = '{$row['unique_id']}' 
-//             OR outgoing_msg_id = '{$row['unique_id']}') AND (outgoing_msg_id = '{$outgoing_id}' 
-//             OR incoming_msg_id = '{$outgoing_id}') ORDER BY msg_id DESC LIMIT 1";
-//     $query2 = mysqli_query($conn, $sql2);
-    
-//     if (!$query2) {
-//         die('Query Error: ' . mysqli_error($conn)); // Tangani kesalahan query
-//     }
-    
-//     if (mysqli_num_rows($query2) > 0) {
-//         $row2 = mysqli_fetch_assoc($query2);
-//         $decrypted_message = decryptMessage($row2['msg'], $encryption_key);
-//         $msg = (strlen($decrypted_message) > 28) ? substr($decrypted_message, 0, 28) . '...' : $decrypted_message;
-//         $you = ($outgoing_id == $row2['outgoing_msg_id']) ? "Anda: " : "";
-//         $msg_id = $row2['msg_id'];
-//     } else {
-//         $msg = "Belum ada pesan";
-//         $you = "";
-//         $msg_id = 0; // Jika tidak ada pesan, beri nilai msg_id yang lebih rendah dari yang ada
-//     }
-
-//     // Simpan data pengguna dan pesan terakhirnya dalam array, jika belum ada
-//     $user_key = $row['unique_id']; // Ambil unique_id pengguna
-//     if (!array_key_exists($user_key, $users)) { // Cek apakah pengguna sudah ada
-//         $users[$user_key] = [
-//             'unique_id' => $row['unique_id'],
-//             'fname' => $row['fname'],
-//             'lname' => $row['lname'],
-//             'img' => $row['img'],
-//             'status' => $row['status'],
-//             'msg' => $msg,
-//             'you' => $you,
-//             'msg_id' => $msg_id
-//         ];
-//     }
-// }
-
-// // Ambil pengguna terakhir yang memiliki pesan
-// if (!empty($users)) {
-//     // Urutkan pengguna berdasarkan pesan terakhir
-//     usort($users, function($a, $b) {
-//         return $b['msg_id'] <=> $a['msg_id']; // Urutkan secara descending
-//     });
-
-//     $displayed_users = []; // Array untuk melacak pengguna yang sudah ditampilkan
-
-//     // Lakukan perulangan pada setiap pengguna yang telah diurutkan
-//     foreach ($users as $user) {
-//         // Cek apakah pengguna sudah ditampilkan
-//         if (!in_array($user['unique_id'], $displayed_users)) {
-//             // Check status online - offline user
-//             $offline = ($user['status'] == "Offline") ? "offline" : "";
-
-//             // Buat output HTML untuk setiap pengguna
-//             $output .= '<a href="chat.php?user_id='.$user['unique_id'].'">
-//                         <div class="content">
-//                             <img src="images/'. $user['img'] .'" alt="User Image" loading="lazy">
-//                             <div class="details">
-//                                 <span>'. htmlspecialchars($user['fname']) . " " . htmlspecialchars($user['lname']) .'</span>
-//                                 <p>'. $user['you'] . htmlspecialchars($user['msg']) .'</p>
-//                             </div>
-//                         </div>
-//                         <div class="status-dot '. $offline .' "><i class="fas fa-circle"></i></div>
-//                         </a>';
-
-//             // Tambahkan pengguna ke dalam daftar yang sudah ditampilkan
-//             $displayed_users[] = $user['unique_id'];
-//         }
-//     }
-
-//     echo $output; // Output semua pengguna
-// } else {
-//     echo "Tidak ada pengguna untuk ditampilkan.";
-// }
-// 

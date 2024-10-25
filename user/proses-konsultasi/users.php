@@ -16,7 +16,7 @@ $output = "";
 if (mysqli_num_rows($sql) == 0) {
     $output .= "Tidak ada pesan yang tersedia!";
 } else {
-    include "data.php";
+    include "data.php"; // Include file data.php untuk memproses data
 }
 
 echo $output;

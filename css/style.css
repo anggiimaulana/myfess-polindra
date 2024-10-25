@@ -1868,3 +1868,56 @@ hr {
     color: #fff;
     background-color: #ff0b0b;
 }
+
+#chatbox { 
+    margin: 10px 25px;
+    border: 1px solid #ccc; 
+    height: 287px; 
+    overflow-y: scroll; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    background-color: #f9f9f9;
+}
+@media screen and(max-width:576px) {
+    #chatbox {
+        height: 250px;
+    }
+}
+#userInput { 
+    width: calc(100% - 110px); 
+    padding: 10px; 
+    margin-right: 10px; 
+    box-sizing: border-box;
+}
+button { 
+    padding: 10px; 
+    width: 80px; 
+    cursor: pointer; 
+}
+.user-message {
+    background-color: #e0e0e0; 
+    margin: 5px 0; 
+    padding: 5px; 
+    border-radius: 5px;
+}
+.bot-message {
+    background-color: #d1ffd1; 
+    margin: 5px 0; 
+    padding: 5px; 
+    border-radius: 5px;
+}
+
+.chatbot {
+    margin-left: 15px;
+}
+
+.inputBot input[type='text'] {
+    border: 1px solid #ccc;
+}
+
+.inputBot button {
+    background-color: #ff0b0b;
+    color: #fff;
+    border-radius: 15px;
+    border: none;
+}
