@@ -39,7 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $result = json_decode($response, true);
         if (isset($result['choices'][0]['message']['content'])) {
-            $bot_message = $result['choices'][0]['message']['content'];
+            $bot_message = nl2br($result['choices'][0]['message']['content']);
+            $bot_message = preg_replace('/\*(.*?)\*\*/', '<strong>$1</strong>', $bot_message);
+            $bot_message = preg_replace('/\*(.*?)\*/', '<em>$1</em>', $bot_message);
+            // $bot_message = $result['choices'][0]['message']['content'];
             echo json_encode(['reply' => $bot_message]);
         } else {
             echo json_encode(['reply' => 'Maaf, tidak ada respons yang diterima dari API.']);

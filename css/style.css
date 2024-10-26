@@ -1820,7 +1820,7 @@ min-height: 65vh;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    padding: 5px 25px;
+    padding: 5px 20px;
     /* border: 1px solid #ccc; */
     cursor: pointer;
 }
